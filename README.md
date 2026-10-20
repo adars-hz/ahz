@@ -1,3 +1,4 @@
+ HEAD
 # Adarsh M S - 3D Cosmic Galaxy Portfolio
 
 An interactive 3D WebGL developer portfolio featuring a live particle galaxy, floating wireframe tech polyhedrons, glassmorphic UI, ambient cosmic sound synthesizer, and an easy configuration file.
@@ -65,3 +66,7 @@ Open this file in your editor to change:
   - Change your name, roles, and contacts directly on screen and copy the updated code with 1 click!
 - **Cosmic Audio Synthesizer**:
   - Click the speaker button or `Ahz CTRL` pill to toggle an ambient space drone synthesized natively with the Web Audio API (zero audio files needed).
+=======
+# ahz-portfolio-
+Personal portfolio
+ aa4a7215c86def17475f234c0308a95d70712c90
