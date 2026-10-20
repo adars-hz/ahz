@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adarsh M S | Full Stack Developer</title>
+    <meta name="description" content="Portfolio of Adarsh M S - Full Stack Developer specializing in Python, Django, JavaScript, and Modern Scalable Systems." />
+    <meta name="theme-color" content="#02050e" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <!-- 3D WebGL Canvas Container -->
+    <div id="webgl-canvas-container"></div>
+
+    <!-- Main Hero Overlay UI (matches the exact layout from the uploaded image) -->
+    <main class="hero-overlay" id="hero-overlay">
+      <div class="hero-content">
+        <!-- Subtitle Greeting -->
+        <div class="hero-greeting" id="hero-greeting">HI, I'M</div>
+
+        <!-- Main Name Heading -->
+        <h1 class="hero-name" id="hero-name">ADARSH M S</h1>
+
+        <!-- Typewriter Role Subtitle -->
+        <div class="hero-role-wrapper">
+          <span class="hero-role-text" id="typewriter-text">Full Stack Developer</span>
+          <span class="typewriter-cursor">|</span>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="hero-actions" id="hero-actions">
+          <button class="btn-primary" id="btn-view-projects">
+            <span>View Projects</span>
+          </button>
+          <button class="btn-glass" id="btn-about">
+            <span>About</span>
+          </button>
+          <button class="btn-glass" id="btn-contact">
+            <span>Contact</span>
+          </button>
+          <button class="btn-glass btn-resume" id="btn-resume">
+            <svg class="icon-download" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Resume</span>
+          </button>
+        </div>
+
+        <!-- Social Icons Row -->
+        <div class="hero-socials" id="hero-socials">
+          <a href="#" target="_blank" rel="noopener noreferrer" class="social-circle-btn" id="social-github" title="GitHub Profile">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg>
+          </a>
+          <a href="#" target="_blank" rel="noopener noreferrer" class="social-circle-btn" id="social-linkedin" title="LinkedIn Profile">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+              <rect x="2" y="9" width="4" height="12"></rect>
+              <circle cx="4" cy="4" r="2"></circle>
+            </svg>
+          </a>
+          <a href="#" target="_blank" rel="noopener noreferrer" class="social-circle-btn" id="social-email" title="Send Email">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <!-- Bottom Right Control Pill (Matches exact Ahz CTRL pill from image) -->
+    <div class="bottom-control-pill" id="bottom-control-pill" title="Click to customize portfolio or toggle audio">
+      <span class="pulsing-cyan-dot"></span>
+      <span class="ctrl-text" id="pill-title">Ahz</span>
+      <span class="ctrl-key-badge">CTRL</span>
+    </div>
+
+    <!-- AHZ // SYSTEM CORE (Exact replica of reference image) -->
+    <aside class="ahz-system-panel" id="ahz-system-panel" aria-hidden="true">
+      <div class="ahz-panel-header">
+        <div class="ahz-title-group">
+          <span class="ahz-bolt-icon">⚡</span>
+          <span class="ahz-title-text">AHZ // SYSTEM CORE</span>
+          <span class="ahz-status-badge">ONLINE</span>
+        </div>
+        <button class="ahz-close-btn" id="ahz-close-btn" title="Close Panel">×</button>
+      </div>
+
+      <!-- Signature & Core Mode Card -->
+      <div class="ahz-info-card">
+        <div class="ahz-info-row">
+          <span class="ahz-info-label">SIGNATURE</span>
+          <span class="ahz-info-value signature-name" id="ahz-signature-name">Ahz (Adarsh M S)</span>
+        </div>
+        <div class="ahz-info-row">
+          <span class="ahz-info-label">CORE MODE</span>
+          <span class="ahz-info-value core-mode-text">3D Interactive Galaxy</span>
+        </div>
+      </div>
+
+      <!-- Ambient Music Player -->
+      <div class="ahz-section">
+        <div class="ahz-section-title">AMBIENT MUSIC PLAYER</div>
+        <div class="ahz-music-card">
+          <div class="ahz-music-info">
+            <div class="ahz-music-name">
+              <span class="ahz-music-icon">♫</span>
+              <span>Cosmic Ambient Drift</span>
+            </div>
+            <div class="ahz-music-status" id="ahz-music-status">Paused</div>
+          </div>
+          <button class="ahz-play-btn" id="ahz-music-play-btn">
+            <span id="ahz-play-text">▷ Play</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Galaxy Particles Theme -->
+      <div class="ahz-section">
+        <div class="ahz-section-title">GALAXY PARTICLES THEME</div>
+        <div class="ahz-theme-grid">
+          <button class="ahz-theme-btn" data-theme="pink">
+            <span class="theme-dot dot-pink"></span>
+            <span>Cosmic Pink</span>
+          </button>
+          <button class="ahz-theme-btn active" data-theme="cyan">
+            <span class="theme-dot dot-cyan"></span>
+            <span>Cyber Cyan</span>
+          </button>
+          <button class="ahz-theme-btn" data-theme="gold">
+            <span class="theme-dot dot-gold"></span>
+            <span>Solar Gold</span>
+          </button>
+          <button class="ahz-theme-btn" data-theme="emerald">
+            <span class="theme-dot dot-emerald"></span>
+            <span>Neon Emerald</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 3D Rotation Speed -->
+      <div class="ahz-section">
+        <div class="ahz-section-title">3D ROTATION SPEED</div>
+        <div class="ahz-speed-grid">
+          <button class="ahz-speed-btn active" data-speed="1">
+            <span>Standard (1x)</span>
+          </button>
+          <button class="ahz-speed-btn" data-speed="3">
+            <span>⚡ Hyperdrive (3x)</span>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Modal Container for Projects, About, Contact, Resume, Live Customizer -->
+    <div id="modal-overlay-container" class="modal-overlay-container"></div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
