@@ -1469,93 +1469,107 @@ html, body {
   }
 }
 
-/* Mobile Devices (Under 640px) */
-@media (max-width: 640px) {
+/* Mobile Devices (Under 768px) */
+@media (max-width: 768px) {
   .hero-overlay {
     top: auto;
     bottom: 0;
-    height: auto;
-    max-height: 50vh;
-    overflow: hidden;
-    padding: 0 1rem 1rem 1rem;
+    left: 0;
+    width: 100vw;
+    height: 56%;
+    height: 56dvh;
+    max-height: none;
+    overflow: visible;
+    padding: 0 1rem calc(2.8rem + env(safe-area-inset-bottom, 0px)) 1rem;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     pointer-events: none;
+    z-index: 10;
   }
 
   .hero-content {
     width: 100%;
     max-width: 440px;
-    background: radial-gradient(ellipse at center, rgba(2, 5, 14, 0.72) 0%, rgba(2, 5, 14, 0) 80%);
-    padding: 10px 12px;
-    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: radial-gradient(ellipse at center, rgba(2, 5, 14, 0.72) 0%, rgba(2, 5, 14, 0.35) 65%, rgba(2, 5, 14, 0) 100%);
+    padding: 10px 14px;
+    border-radius: 20px;
+    pointer-events: auto;
+    transform: translateY(-22px);
   }
 
   .hero-greeting {
-    font-size: 11px;
-    letter-spacing: 2px;
-    margin-bottom: 3px;
+    font-size: 11.5px;
+    letter-spacing: 2.2px;
+    margin-bottom: 5px;
     text-shadow: 0 0 12px rgba(56, 189, 248, 0.8);
   }
 
   .hero-name {
-    font-size: clamp(24px, 7vw, 32px);
-    letter-spacing: 1.2px;
-    margin-bottom: 4px;
+    font-size: clamp(26px, 7.5vw, 34px);
+    letter-spacing: 1.4px;
+    margin-bottom: 5px;
     line-height: 1.1;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9), 0 0 25px rgba(255, 255, 255, 0.5), 0 0 40px rgba(56, 189, 248, 0.4);
   }
 
   .hero-role-wrapper {
     font-size: clamp(13px, 3.8vw, 15px);
-    margin-bottom: 14px;
+    margin-bottom: 16px;
     justify-content: center;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
   }
 
   .hero-actions {
-    gap: 6px;
-    margin-bottom: 14px;
+    gap: 7px;
+    margin-bottom: 16px;
     width: 100%;
     justify-content: center;
   }
 
   .btn-primary {
-    padding: 6px 14px;
-    font-size: 11.5px;
+    padding: 7px 15px;
+    font-size: 12px;
     font-weight: 600;
   }
 
   .btn-glass {
-    padding: 6px 11px;
-    font-size: 11.5px;
-    gap: 5px;
+    padding: 7px 13px;
+    font-size: 12px;
+    gap: 6px;
   }
 
   .btn-resume .icon-download {
-    width: 12px;
-    height: 12px;
+    width: 13px;
+    height: 13px;
   }
 
   .hero-socials {
-    gap: 10px;
+    gap: 12px;
   }
 
   .social-circle-btn {
-    width: 34px;
-    height: 34px;
+    width: 36px;
+    height: 36px;
   }
 
   .social-circle-btn svg {
-    width: 15px;
-    height: 15px;
+    width: 16px;
+    height: 16px;
   }
 
   /* Compact 3D labels on mobile screens */
   .skill-label .label-name {
-    font-size: 8px;
-    padding: 1.5px 5px;
-    letter-spacing: 0.3px;
+    font-size: 7.5px;
+    padding: 1px 4.5px;
+    letter-spacing: 0.2px;
+    border-radius: 9999px;
   }
 
   /* Compact bottom control pill */
@@ -1836,21 +1850,75 @@ html, body {
 /* Very Small Mobile Screens (Under 380px) */
 @media (max-width: 380px) {
   .hero-name {
-    font-size: 26px;
+    font-size: 24px;
+    letter-spacing: 1px;
   }
 
   .hero-role-wrapper {
-    font-size: 14px;
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+
+  .hero-actions {
+    gap: 5px;
+    margin-bottom: 12px;
   }
 
   .btn-primary,
   .btn-glass {
-    padding: 8px 14px;
-    font-size: 12px;
+    padding: 6px 11px;
+    font-size: 11px;
+  }
+
+  .hero-socials {
+    gap: 9px;
   }
 
   .social-circle-btn {
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* Landscape / Shorter Mobile Viewports (Height under 700px) */
+@media (max-height: 700px) and (max-width: 768px) {
+  .hero-overlay {
+    height: 52%;
+    height: 52dvh;
+    padding-bottom: 10px;
+  }
+
+  .hero-greeting {
+    margin-bottom: 2px;
+  }
+
+  .hero-name {
+    font-size: 23px;
+    margin-bottom: 3px;
+  }
+
+  .hero-role-wrapper {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+
+  .hero-actions {
+    margin-bottom: 10px;
+    gap: 5px;
+  }
+
+  .btn-primary,
+  .btn-glass {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+
+  .hero-socials {
+    gap: 8px;
+  }
+
+  .social-circle-btn {
+    width: 30px;
+    height: 30px;
   }
 }

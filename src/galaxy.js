@@ -92,6 +92,7 @@ export class GalaxyScene {
 
     // 2. Camera
     const isMobile = window.innerWidth < 768;
+    this.wasMobile = isMobile;
     this.camera = new THREE.PerspectiveCamera(
       55,
       window.innerWidth / window.innerHeight,
@@ -372,13 +373,13 @@ export class GalaxyScene {
     this.scene.add(this.starfieldPoints);
   }
 
-  // Floating Wireframe Polyhedrons: made delicate & compact as requested
+  // Floating Wireframe Polyhedrons: small & delicate, orbiting WITH the galaxy in a spacious, uncongested path
   createFloatingPolyhedrons() {
     const skills = PORTFOLIO_CONFIG.skills;
     this.polyhedronNodes = [];
 
-    // Container group for all polyhedrons so they move together with galaxy
     const isMobile = window.innerWidth < 768;
+
     if (!this.polyhedronGroup) {
       this.polyhedronGroup = new THREE.Group();
       this.scene.add(this.polyhedronGroup);
@@ -386,9 +387,13 @@ export class GalaxyScene {
       while (this.polyhedronGroup.children.length > 0) {
         this.polyhedronGroup.remove(this.polyhedronGroup.children[0]);
       }
+      if (this.polyhedronGroup.parent !== this.scene) {
+        this.scene.add(this.polyhedronGroup);
+      }
     }
-    this.polyhedronGroup.position.set(isMobile ? 0 : 0, isMobile ? 3.0 : 0, isMobile ? -1.0 : 0);
-    this.polyhedronGroup.scale.set(isMobile ? 0.72 : 1, isMobile ? 0.72 : 1, isMobile ? 0.72 : 1);
+
+    this.polyhedronGroup.position.set(isMobile ? 0 : 1.4, isMobile ? 3.0 : 0.1, -1.0);
+    this.polyhedronGroup.scale.set(1.0, 1.0, 1.0);
 
     // Create a DOM container for the crisp projected labels
     if (!this.labelsContainer) {
@@ -401,10 +406,24 @@ export class GalaxyScene {
 
     const theme = GALAXY_THEMES[this.currentTheme];
 
+    // Base orbit configurations (45 degrees apart for generous, uncongested spacing)
+    const skillAngles = {
+      python: { angle: 0, radiusMult: 1.0 },
+      javascript: { angle: Math.PI * 0.25, radiusMult: 0.98 },
+      django: { angle: Math.PI * 0.5, radiusMult: 1.02 },
+      git: { angle: Math.PI * 0.75, radiusMult: 0.97 },
+      react: { angle: Math.PI, radiusMult: 1.0 },
+      sqlite: { angle: Math.PI * 1.25, radiusMult: 0.96 },
+      mongodb: { angle: Math.PI * 1.5, radiusMult: 1.03 },
+      fastapi: { angle: Math.PI * 1.75, radiusMult: 0.98 }
+    };
+
+    const totalSkills = skills.length;
+
     skills.forEach((skill, index) => {
-      // 1. Choose geometry type: size 0.25 (scaled down from 0.52 for delicate refined look)
+      // 1. Choose geometry type: small & delicate on mobile screen!
       let geom;
-      const size = 0.25;
+      const size = isMobile ? 0.12 : 0.22;
       if (skill.geometry === 'octahedron') {
         geom = new THREE.OctahedronGeometry(size, 0);
       } else {
@@ -417,7 +436,7 @@ export class GalaxyScene {
         color: 0xdbeafe,
         transparent: true,
         opacity: 0.85,
-        linewidth: 1.5
+        linewidth: 1.2
       });
       const wireframe = new THREE.LineSegments(wireframeGeo, wireframeMat);
 
@@ -431,11 +450,11 @@ export class GalaxyScene {
       });
       const mesh = new THREE.Mesh(geom, facetMat);
 
-      // 4. Glowing center core dot (size 0.09)
+      // 4. Glowing center core dot
       const dotGeo = new THREE.BufferGeometry();
       dotGeo.setAttribute('position', new THREE.Float32BufferAttribute([0, 0, 0], 3));
       const dotMat = new THREE.PointsMaterial({
-        size: 0.09,
+        size: isMobile ? 0.045 : 0.08,
         color: theme.dotColor,
         blending: THREE.AdditiveBlending,
         transparent: true
@@ -448,8 +467,20 @@ export class GalaxyScene {
       group.add(wireframe);
       group.add(centerDot);
 
-      const [x, y, z] = skill.position;
-      group.position.set(x, y, z);
+      const conf = skillAngles[skill.id] || {
+        angle: (index / totalSkills) * Math.PI * 2,
+        radiusMult: 1.0
+      };
+
+      const rx = isMobile ? 2.9 : 3.7;
+      const ry = isMobile ? 2.1 : 2.6;
+      const rz = isMobile ? 0.9 : 1.2;
+
+      const initX = Math.cos(conf.angle) * rx * conf.radiusMult;
+      const initY = Math.sin(conf.angle) * ry * conf.radiusMult;
+      const initZ = Math.sin(conf.angle) * rz * conf.radiusMult;
+
+      group.position.set(initX, initY, initZ);
       this.polyhedronGroup.add(group);
 
       // 6. DOM Label element (compact & small)
@@ -477,7 +508,8 @@ export class GalaxyScene {
         facetMat,
         centerDot,
         label,
-        initialPos: new THREE.Vector3(x, y, z),
+        baseAngle: conf.angle,
+        radiusMult: conf.radiusMult,
         rotSpeedX: 0.009 + (index % 3) * 0.004,
         rotSpeedY: 0.013 + (index % 4) * 0.003,
         floatSpeed: 1.2 + (index % 5) * 0.3,
@@ -527,9 +559,14 @@ export class GalaxyScene {
     if (this.galaxyGroup) {
       this.galaxyGroup.position.set(isMobile ? 0 : 1.4, isMobile ? 3.0 : 0.1, -1.0);
     }
+
     if (this.polyhedronGroup) {
-      this.polyhedronGroup.position.set(isMobile ? 0 : 0, isMobile ? 3.0 : 0, isMobile ? -1.0 : 0);
-      this.polyhedronGroup.scale.set(isMobile ? 0.72 : 1, isMobile ? 0.72 : 1, isMobile ? 0.72 : 1);
+      this.polyhedronGroup.position.set(isMobile ? 0 : 1.4, isMobile ? 3.0 : 0.1, -1.0);
+    }
+
+    if (this.wasMobile !== isMobile) {
+      this.wasMobile = isMobile;
+      this.reloadSkills();
     }
 
     this.renderer.setSize(window.innerWidth, window.innerHeight);
@@ -577,21 +614,34 @@ export class GalaxyScene {
     // 5. Update Polyhedron Rotations, Float, Scales & Screen Labels
     const tempVec = new THREE.Vector3();
     const currentThemeData = GALAXY_THEMES[this.currentTheme];
+    const isMobile = window.innerWidth < 768;
+
+    const rx = isMobile ? 2.9 : 3.7;
+    const ry = isMobile ? 2.1 : 2.6;
+    const rz = isMobile ? 0.9 : 1.2;
 
     this.polyhedronNodes.forEach((node) => {
-      // Rotation
-      node.group.rotation.x += node.rotSpeedX * this.speedMultiplier;
-      node.group.rotation.y += node.rotSpeedY * this.speedMultiplier;
+      // Orbit around galaxy in sync with galaxy rotation (spacious and uncongested)
+      const orbitAngle = node.baseAngle + (this.galaxyGroup ? this.galaxyGroup.rotation.y : 0);
+      const x = Math.cos(orbitAngle) * rx * node.radiusMult;
+      const y = Math.sin(orbitAngle) * ry * node.radiusMult;
+      const z = Math.sin(orbitAngle) * rz * node.radiusMult;
 
-      // Floating wave
-      const floatY = Math.sin(elapsedTime * node.floatSpeed + node.floatOffset) * 0.12;
-      node.group.position.y = node.initialPos.y + floatY;
+      const float = Math.sin(elapsedTime * node.floatSpeed + node.floatOffset) * (isMobile ? 0.05 : 0.08);
+      node.group.position.set(x, y + float, z);
+
+      // Rotation: shape spins on its own center
+      node.wireframe.rotation.x += node.rotSpeedX * this.speedMultiplier;
+      node.wireframe.rotation.y += node.rotSpeedY * this.speedMultiplier;
+      node.mesh.rotation.x = node.wireframe.rotation.x;
+      node.mesh.rotation.y = node.wireframe.rotation.y;
 
       // Hover reaction
       const isHovered = (hitNode === node);
-      node.targetScale = isHovered ? 1.35 : 1.0;
+      node.targetScale = isHovered ? 1.3 : 1.0;
       node.currentScale += (node.targetScale - node.currentScale) * 0.12;
-      node.group.scale.set(node.currentScale, node.currentScale, node.currentScale);
+      node.wireframe.scale.set(node.currentScale, node.currentScale, node.currentScale);
+      node.mesh.scale.set(node.currentScale, node.currentScale, node.currentScale);
 
       if (isHovered) {
         node.wireframeMat.color.set(currentThemeData.wireframeHover);
@@ -603,8 +653,7 @@ export class GalaxyScene {
 
       // Project 3D position to 2D Screen for Label using world position
       node.group.getWorldPosition(tempVec);
-      const isMobile = window.innerWidth < 768;
-      tempVec.y -= (isMobile ? 0.24 : 0.34) * node.currentScale;
+      tempVec.y -= (isMobile ? 0.13 : 0.28) * node.currentScale;
       tempVec.project(this.camera);
 
       // Check if within screen bounds and in front of camera
