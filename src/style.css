@@ -36,16 +36,13 @@
 }
 
 html, body {
-  width: 100vw;
-  height: 100vh;
-  height: 100dvh;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
   margin: 0;
   padding: 0;
-  overflow: hidden !important;
-  position: fixed;
-  top: 0;
-  left: 0;
-  overscroll-behavior: none !important;
+  overflow-x: hidden;
   background-color: var(--bg-space);
   color: var(--text-primary);
   font-family: var(--font-body);
@@ -1837,26 +1834,29 @@ html, body {
     font-size: 10.5px;
   }
 
-  /* Modals on Mobile - Silk Bottom Sheet Presentation */
+  /* Modals on Mobile - Full Screen Fit (No Top Gap) */
   .modal-overlay-container {
     padding: 0;
-    align-items: flex-end;
+    align-items: stretch;
+    justify-content: stretch;
   }
 
   .modal-card {
-    padding: 0.85rem 1.15rem calc(1.5rem + env(safe-area-inset-bottom, 0px)) 1.15rem;
-    border-radius: 24px 24px 0 0;
-    height: auto;
-    max-height: 90vh;
-    max-height: 90dvh;
+    padding: 0 1rem calc(1.5rem + env(safe-area-inset-bottom, 0px)) 1rem;
+    border-radius: 0;
+    height: 100vh;
+    height: 100dvh;
+    min-height: 100vh;
+    min-height: 100dvh;
+    max-height: 100vh;
+    max-height: 100dvh;
     width: 100%;
-    border-left: none;
-    border-right: none;
-    border-bottom: none;
+    border: none;
+    box-shadow: none;
     scrollbar-width: none;
     -ms-overflow-style: none;
     transform: translateY(100%);
-    transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .modal-overlay-container.active .modal-card {
@@ -1864,59 +1864,82 @@ html, body {
   }
 
   .modal-card::before {
-    content: '';
-    display: block;
-    width: 38px;
-    height: 4px;
-    border-radius: 9999px;
-    background: rgba(255, 255, 255, 0.22);
-    margin: 0 auto 10px auto;
+    display: none;
   }
 
   /* Modal Sticky Top Nav on Mobile */
   .modal-nav-container {
-    margin: 0 -1.15rem 1.25rem -1.15rem;
-    padding: 0.65rem 1rem 0.75rem 1rem;
+    margin: 0 -1rem 1.2rem -1rem;
+    padding: calc(10px + env(safe-area-inset-top, 0px)) 0.75rem 10px 0.75rem;
     border-radius: 0;
-    gap: 6px;
-    background: rgba(10, 10, 10, 0.92);
+    gap: 4px;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .modal-navbar {
-    gap: 2px;
+    gap: 1px;
+    flex: 1;
+    min-width: 0;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    align-items: center;
   }
 
   .modal-nav-btn {
-    font-size: 11.5px;
-    padding: 4px 7px;
+    font-size: 11px;
+    padding: 3.5px 6px;
+    letter-spacing: 0.01em;
     touch-action: manipulation;
+    flex-shrink: 0;
   }
 
   .modal-nav-sep {
-    font-size: 8px;
+    font-size: 7.5px;
     margin: 0;
-    color: rgba(255, 255, 255, 0.18);
+    padding: 0 1px;
+    color: rgba(255, 255, 255, 0.2);
   }
 
   .modal-close-btn {
     position: static;
     top: auto;
     right: auto;
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    min-height: 28px;
     touch-action: manipulation;
+    padding: 0;
+    flex-shrink: 0;
+  }
+
+  .modal-header {
+    margin-bottom: 1.25rem;
+  }
+
+  .modal-sub {
+    font-size: 11px;
+    margin-bottom: 4px;
+    letter-spacing: 1.5px;
   }
 
   .modal-title {
-    font-size: clamp(20px, 5.2vw, 25px);
+    font-size: clamp(20px, 5.2vw, 24px);
     line-height: 1.25;
     letter-spacing: -0.3px;
     word-break: normal;
+    margin-bottom: 6px;
   }
 
   .modal-desc {
-    font-size: 13.5px;
+    font-size: 13px;
     line-height: 1.5;
+    margin-bottom: 1.2rem;
   }
 
   .filter-bar {

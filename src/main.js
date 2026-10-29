@@ -169,28 +169,7 @@ class PortfolioApp {
       }
     });
 
-    // 6. Ambient Music Player inside System Core Panel
-    const playBtn = document.getElementById('ahz-music-play-btn');
-    const playText = document.getElementById('ahz-play-text');
-    const musicStatus = document.getElementById('ahz-music-status');
-
-    if (playBtn) {
-      playBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const isPlaying = this.audio.toggle();
-        if (isPlaying) {
-          playBtn.classList.add('playing');
-          if (playText) playText.textContent = '❚❚ Pause';
-          if (musicStatus) musicStatus.textContent = 'Playing...';
-        } else {
-          playBtn.classList.remove('playing');
-          if (playText) playText.textContent = '▷ Play';
-          if (musicStatus) musicStatus.textContent = 'Paused';
-        }
-      });
-    }
-
-    // 7. Galaxy Particles Theme Switcher
+    // 6. Galaxy Particles Theme Switcher
     const themeButtons = document.querySelectorAll('.ahz-theme-btn');
     themeButtons.forEach(btn => {
       btn.addEventListener('click', (e) => {
@@ -223,18 +202,11 @@ class PortfolioApp {
     // Play subtle chime sound on button hovers
     document.querySelectorAll('button, .social-circle-btn, .bottom-control-pill').forEach(btn => {
       btn.addEventListener('mouseenter', () => {
-        if (this.audio && this.audio.isPlaying) {
+        if (this.audio) {
           this.audio.playChime(1200);
         }
       });
     });
-
-    // Strict touch containment: prevent any viewport scroll bouncing or pulling on mobile
-    document.addEventListener('touchmove', (e) => {
-      if (!e.target.closest('.modal-card') && !e.target.closest('.ahz-system-panel') && !e.target.closest('.filter-bar')) {
-        e.preventDefault();
-      }
-    }, { passive: false });
   }
 }
 
