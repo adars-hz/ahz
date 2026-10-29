@@ -122,6 +122,7 @@ export class GalaxyScene {
     window.addEventListener('resize', this.onWindowResize.bind(this));
     window.addEventListener('mousemove', this.onMouseMove.bind(this));
     window.addEventListener('touchmove', this.onTouchMove.bind(this), { passive: true });
+    window.addEventListener('touchstart', this.onTouchStart.bind(this), { passive: true });
     window.addEventListener('click', this.onClick.bind(this));
 
     // 6. Animation Loop
@@ -154,9 +155,10 @@ export class GalaxyScene {
   createGalaxy(starTexture) {
     const galaxyGroup = new THREE.Group();
     const isMobile = window.innerWidth < 768;
-    galaxyGroup.position.set(isMobile ? 0 : 1.4, isMobile ? 3.0 : 0.1, -1.0);
-    galaxyGroup.rotation.x = 0.42;
-    galaxyGroup.rotation.z = -0.15;
+    const baseTilt = isMobile ? 0.95 : 0.42;
+    galaxyGroup.position.set(isMobile ? 0 : 1.4, isMobile ? 3.4 : 0.1, -1.0);
+    galaxyGroup.rotation.x = baseTilt;
+    galaxyGroup.rotation.z = isMobile ? -0.08 : -0.15;
     this.galaxyGroup = galaxyGroup;
     this.scene.add(galaxyGroup);
 
@@ -392,7 +394,7 @@ export class GalaxyScene {
       }
     }
 
-    this.polyhedronGroup.position.set(isMobile ? 0 : 1.4, isMobile ? 3.0 : 0.1, -1.0);
+    this.polyhedronGroup.position.set(isMobile ? 0 : 1.4, isMobile ? 3.4 : 0.1, -1.0);
     this.polyhedronGroup.scale.set(1.0, 1.0, 1.0);
 
     // Create a DOM container for the crisp projected labels
@@ -528,15 +530,29 @@ export class GalaxyScene {
     this.mouseVector.y = -(e.clientY / window.innerHeight) * 2 + 1;
   }
 
+  onTouchStart(e) {
+    if (e.touches && e.touches.length > 0) {
+      const touch = e.touches[0];
+      this.mouseVector.x = (touch.clientX / window.innerWidth) * 2 - 1;
+      this.mouseVector.y = -(touch.clientY / window.innerHeight) * 2 + 1;
+    }
+  }
+
   onTouchMove(e) {
-    if (e.touches.length > 0) {
+    if (e.touches && e.touches.length > 0) {
       const touch = e.touches[0];
       this.mouse.targetX = (touch.clientX - this.windowHalfX) * 0.0006;
       this.mouse.targetY = (touch.clientY - this.windowHalfY) * 0.0006;
+      this.mouseVector.x = (touch.clientX / window.innerWidth) * 2 - 1;
+      this.mouseVector.y = -(touch.clientY / window.innerHeight) * 2 + 1;
     }
   }
 
   onClick(e) {
+    if (e && e.clientX !== undefined && e.clientY !== undefined) {
+      this.mouseVector.x = (e.clientX / window.innerWidth) * 2 - 1;
+      this.mouseVector.y = -(e.clientY / window.innerHeight) * 2 + 1;
+    }
     this.raycaster.setFromCamera(this.mouseVector, this.camera);
     for (const node of this.polyhedronNodes) {
       const intersects = this.raycaster.intersectObject(node.mesh);
@@ -556,12 +572,16 @@ export class GalaxyScene {
     this.camera.position.z = isMobile ? 14.0 : 11;
     this.camera.updateProjectionMatrix();
 
+    const baseTilt = isMobile ? 0.95 : 0.42;
+
     if (this.galaxyGroup) {
-      this.galaxyGroup.position.set(isMobile ? 0 : 1.4, isMobile ? 3.0 : 0.1, -1.0);
+      this.galaxyGroup.position.set(isMobile ? 0 : 1.4, isMobile ? 3.4 : 0.1, -1.0);
+      this.galaxyGroup.rotation.x = baseTilt;
+      this.galaxyGroup.rotation.z = isMobile ? -0.08 : -0.15;
     }
 
     if (this.polyhedronGroup) {
-      this.polyhedronGroup.position.set(isMobile ? 0 : 1.4, isMobile ? 3.0 : 0.1, -1.0);
+      this.polyhedronGroup.position.set(isMobile ? 0 : 1.4, isMobile ? 3.4 : 0.1, -1.0);
     }
 
     if (this.wasMobile !== isMobile) {
@@ -582,16 +602,18 @@ export class GalaxyScene {
     this.mouse.x += (this.mouse.targetX - this.mouse.x) * 0.05;
     this.mouse.y += (this.mouse.targetY - this.mouse.y) * 0.05;
 
-    this.camera.position.x = this.mouse.x * 3.5;
-    this.camera.position.y = -this.mouse.y * 3.0;
-    this.camera.lookAt(0.6, 0, 0);
+    const isMobile = window.innerWidth < 768;
+    this.camera.position.x = this.mouse.x * (isMobile ? 1.5 : 3.5);
+    this.camera.position.y = -this.mouse.y * (isMobile ? 1.5 : 3.0);
+    this.camera.lookAt(isMobile ? 0 : 0.6, isMobile ? 1.0 : 0, 0);
 
     // 2. Galaxy majestic rotation with smooth speed multiplier
     this.speedMultiplier += (this.targetSpeedMultiplier - this.speedMultiplier) * 0.06;
 
+    const baseTilt = isMobile ? 0.95 : 0.42;
     if (this.galaxyGroup) {
       this.galaxyGroup.rotation.y += 0.0012 * this.speedMultiplier;
-      this.galaxyGroup.rotation.x = 0.42 + Math.sin(elapsedTime * 0.15) * 0.02;
+      this.galaxyGroup.rotation.x = baseTilt + Math.sin(elapsedTime * 0.15) * 0.02;
     }
 
     // 3. Twinkle background stars slightly
@@ -614,11 +636,10 @@ export class GalaxyScene {
     // 5. Update Polyhedron Rotations, Float, Scales & Screen Labels
     const tempVec = new THREE.Vector3();
     const currentThemeData = GALAXY_THEMES[this.currentTheme];
-    const isMobile = window.innerWidth < 768;
 
-    const rx = isMobile ? 2.9 : 3.7;
-    const ry = isMobile ? 2.1 : 2.6;
-    const rz = isMobile ? 0.9 : 1.2;
+    const rx = isMobile ? 3.1 : 3.7;
+    const ry = isMobile ? 2.5 : 2.6;
+    const rz = isMobile ? 1.1 : 1.2;
 
     this.polyhedronNodes.forEach((node) => {
       // Orbit around galaxy in sync with galaxy rotation (spacious and uncongested)
