@@ -24,16 +24,29 @@ export class ModalManager {
     });
   }
 
-  openModal(contentHtml, modalClass = '') {
+  openModal(contentHtml, modalClass = '', activePage = '') {
     if (this.audio) this.audio.playChime(640);
     this.container.innerHTML = `
       <div class="modal-card ${modalClass}">
-        <button class="modal-close-btn" id="modal-close-btn" title="Close (Esc)">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
+        <div class="modal-nav-container">
+          <nav class="modal-navbar" aria-label="Modal page navigation">
+            <button class="modal-nav-btn ${activePage === 'home' ? 'active' : ''}" data-nav="home" title="Return to Home 3D View">home</button>
+            <span class="modal-nav-sep">•</span>
+            <button class="modal-nav-btn ${activePage === 'projects' ? 'active' : ''}" data-nav="projects">projects</button>
+            <span class="modal-nav-sep">•</span>
+            <button class="modal-nav-btn ${activePage === 'about' ? 'active' : ''}" data-nav="about">about</button>
+            <span class="modal-nav-sep">•</span>
+            <button class="modal-nav-btn ${activePage === 'contact' ? 'active' : ''}" data-nav="contact">contact</button>
+            <span class="modal-nav-sep">•</span>
+            <button class="modal-nav-btn ${activePage === 'resume' ? 'active' : ''}" data-nav="resume">resume</button>
+          </nav>
+          <button class="modal-close-btn" id="modal-close-btn" title="Close (Esc)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
         <div class="modal-body">
           ${contentHtml}
         </div>
@@ -48,6 +61,29 @@ export class ModalManager {
     if (closeBtn) {
       closeBtn.addEventListener('click', () => this.closeModal());
     }
+
+    // Attach page navigation listeners
+    const navButtons = this.container.querySelectorAll('.modal-nav-btn');
+    navButtons.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const nav = btn.getAttribute('data-nav');
+        if (nav === activePage) return;
+        if (this.audio) this.audio.playChime(750);
+
+        if (nav === 'home') {
+          this.closeModal();
+        } else if (nav === 'projects') {
+          this.showProjects();
+        } else if (nav === 'about') {
+          this.showAbout();
+        } else if (nav === 'contact') {
+          this.showContact();
+        } else if (nav === 'resume') {
+          this.showResume();
+        }
+      });
+    });
   }
 
   closeModal() {
@@ -114,7 +150,7 @@ export class ModalManager {
       </div>
     `;
 
-    this.openModal(html, 'modal-wide');
+    this.openModal(html, 'modal-wide', 'projects');
 
     // Filter bar interaction
     const filterButtons = document.querySelectorAll('.filter-btn');
@@ -194,7 +230,7 @@ export class ModalManager {
       </div>
     `;
 
-    this.openModal(html, 'modal-wide');
+    this.openModal(html, 'modal-wide', 'about');
   }
 
   // 3. Contact Modal
@@ -272,7 +308,7 @@ export class ModalManager {
       </div>
     `;
 
-    this.openModal(html);
+    this.openModal(html, '', 'contact');
 
     // Copy Email button
     const copyBtn = document.getElementById('btn-copy-email');
@@ -317,12 +353,15 @@ export class ModalManager {
 
         <div class="resume-preview-box">
           <div class="resume-header-bar">
-            <div>
-              <h3>${personal.name}</h3>
-              <p>${personal.roles[0]} • ${personal.location}</p>
-              <p style="font-size: 12px; color: #a3a3a3; margin-top: 3px;">GitHub: adars-hz • LinkedIn: adarshz001</p>
+            <div class="resume-candidate-meta">
+              <h3 class="resume-candidate-name">${personal.name}</h3>
+              <p class="resume-candidate-subtitle">${personal.roles[0]} • ${personal.location}</p>
+              <p class="resume-candidate-links">GitHub: adars-hz • LinkedIn: adarshz001</p>
             </div>
-            <a href="mailto:${PORTFOLIO_CONFIG.contact.email}" class="resume-contact-badge">${PORTFOLIO_CONFIG.contact.email}</a>
+            <a href="mailto:${PORTFOLIO_CONFIG.contact.email}" class="resume-contact-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              <span>${PORTFOLIO_CONFIG.contact.email}</span>
+            </a>
           </div>
 
           <div class="resume-snippet">
@@ -349,7 +388,7 @@ export class ModalManager {
       </div>
     `;
 
-    this.openModal(html);
+    this.openModal(html, '', 'resume');
 
     const downloadBtn = document.getElementById('btn-download-mock-resume');
     if (downloadBtn) {
