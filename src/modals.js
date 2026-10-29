@@ -97,7 +97,7 @@ export class ModalManager {
     const html = `
       <div class="projects-modal-wrap">
         <div class="modal-header">
-          <span class="modal-sub">FEATURED WORK</span>
+          <span class="modal-sub">// FEATURED WORK</span>
           <h2 class="modal-title">Featured Projects</h2>
           <p class="modal-desc">Explore hand-crafted software architectures, web platforms, and interactive experiences.</p>
         </div>
@@ -137,7 +137,7 @@ export class ModalManager {
     const html = `
       <div class="about-modal-wrap">
         <div class="modal-header">
-          <span class="modal-sub">BIOGRAPHY</span>
+          <span class="modal-sub">&gt;_ // BIOGRAPHY</span>
           <h2 class="modal-title">${a.title}</h2>
           <p class="modal-desc">${a.subtitle}</p>
         </div>
@@ -184,7 +184,7 @@ export class ModalManager {
             <div class="skills-pill-group">
               ${skills.map(s => `
                 <span class="tech-arsenal-pill">
-                  <span class="pill-dot" style="background:${s.color}"></span>
+                  <span class="pill-dot"></span>
                   ${s.name} <small>(${s.level})</small>
                 </span>
               `).join('')}
@@ -205,7 +205,7 @@ export class ModalManager {
     const html = `
       <div class="contact-modal-wrap">
         <div class="modal-header">
-          <span class="modal-sub">GET IN TOUCH</span>
+          <span class="modal-sub">// GET IN TOUCH</span>
           <h2 class="modal-title">${c.heading}</h2>
           <p class="modal-desc">${c.subheading}</p>
         </div>
@@ -310,7 +310,7 @@ export class ModalManager {
     const html = `
       <div class="resume-modal-wrap">
         <div class="modal-header">
-          <span class="modal-sub">CURRICULUM VITAE</span>
+          <span class="modal-sub">// CURRICULUM VITAE</span>
           <h2 class="modal-title">${personal.name} - Resume</h2>
           <p class="modal-desc">MCA Candidate • Full Stack & Python Developer • Kannur, Kerala, India</p>
         </div>
@@ -320,7 +320,7 @@ export class ModalManager {
             <div>
               <h3>${personal.name}</h3>
               <p>${personal.roles[0]} • ${personal.location}</p>
-              <p style="font-size: 12px; color: #94a3b8; margin-top: 3px;">GitHub: adars-hz • LinkedIn: adarshz001</p>
+              <p style="font-size: 12px; color: #a3a3a3; margin-top: 3px;">GitHub: adars-hz • LinkedIn: adarshz001</p>
             </div>
             <a href="mailto:${PORTFOLIO_CONFIG.contact.email}" class="resume-contact-badge">${PORTFOLIO_CONFIG.contact.email}</a>
           </div>
@@ -376,9 +376,9 @@ export class ModalManager {
     const html = `
       <div class="skill-detail-wrap">
         <div class="modal-header">
-          <span class="modal-sub">TECH NODE</span>
+          <span class="modal-sub">&lt;&gt; // TECH NODE</span>
           <div class="skill-title-row">
-            <span class="skill-color-indicator" style="background: ${skill.color}"></span>
+            <span class="skill-color-indicator"></span>
             <h2 class="modal-title">${skill.name}</h2>
           </div>
           <p class="modal-desc">${skill.category} • Experience: ${skill.experience}</p>
@@ -390,7 +390,7 @@ export class ModalManager {
             <strong>${skill.level}</strong>
           </div>
           <div class="skill-progress-bar">
-            <div class="skill-progress-fill" style="width: ${skill.level}; background: ${skill.color};"></div>
+            <div class="skill-progress-fill" style="width: ${skill.level};"></div>
           </div>
         </div>
 
@@ -430,7 +430,7 @@ export class ModalManager {
     const html = `
       <div class="editor-drawer-wrap">
         <div class="modal-header">
-          <span class="modal-sub">EASY EDIT SYSTEM</span>
+          <span class="modal-sub">// EASY EDIT SYSTEM</span>
           <h2 class="modal-title">Live Portfolio Customizer</h2>
           <p class="modal-desc">Edit your name, titles, or settings here to test live, or edit <code>src/config.js</code> directly!</p>
         </div>

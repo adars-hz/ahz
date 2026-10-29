@@ -11,9 +11,8 @@ export const PORTFOLIO_CONFIG = {
     name: "ADARSH M S",
     // Typewriter rotating roles reflecting his real skills
     roles: [
-      "Full Stack Developer",
-      "Python & React.js Developer",
-      "MCA Student"
+      "MCA Student",
+      "AI-assisted developer"
     ],
     statusPill: "Ahz CTRL",
     statusSubtitle: "System Core Online",
@@ -125,7 +124,7 @@ export const PORTFOLIO_CONFIG = {
       githubUrl: "https://github.com/adars-hz",
       liveUrl: "https://github.com/adars-hz",
       stats: { stars: "AI Model", forks: "ArcFace" },
-      image: "linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%)"
+      image: "linear-gradient(135deg, #2b2b2b 0%, #0d0d0d 100%)"
     },
     {
       id: "life-connect",
@@ -137,7 +136,7 @@ export const PORTFOLIO_CONFIG = {
       githubUrl: "https://github.com/adars-hz",
       liveUrl: "https://github.com/adars-hz",
       stats: { stars: "3 Roles", forks: "Verified" },
-      image: "linear-gradient(135deg, #065f46 0%, #022c22 100%)"
+      image: "linear-gradient(135deg, #383838 0%, #121212 100%)"
     },
     {
       id: "smart-study-planner",
@@ -149,7 +148,7 @@ export const PORTFOLIO_CONFIG = {
       githubUrl: "https://github.com/adars-hz",
       liveUrl: "https://github.com/adars-hz",
       stats: { stars: "ML Regression", forks: "Flask" },
-      image: "linear-gradient(135deg, #4c1d95 0%, #1e1b4b 100%)"
+      image: "linear-gradient(135deg, #424242 0%, #171717 100%)"
     }
   ],
 

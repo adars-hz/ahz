@@ -16,6 +16,9 @@
   --font-hero: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'Space Mono', 'JetBrains Mono', monospace;
   --font-body: 'Inter', -apple-system, sans-serif;
+  --font-modal-hero: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-modal-body: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-modal-mono: 'Geist Mono', 'SF Mono', 'Fira Code', monospace;
 }
 
 *, *::before, *::after {
@@ -321,7 +324,7 @@ html, body {
   padding: 5px 11px;
   font-family: var(--font-mono);
   font-size: 11px;
-  color: #cbd5e1;
+  color: #e5e5e5;
   cursor: pointer;
   user-select: none;
   opacity: 0.78;
@@ -535,7 +538,7 @@ html, body {
 }
 
 .ahz-music-icon {
-  color: #cbd5e1;
+  color: #e5e5e5;
 }
 
 .ahz-music-status {
@@ -580,7 +583,7 @@ html, body {
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   padding: 9px 12px;
-  color: #cbd5e1;
+  color: #e5e5e5;
   font-family: var(--font-body);
   font-size: 12px;
   font-weight: 500;
@@ -655,7 +658,7 @@ html, body {
   height: 100vh;
   height: 100dvh;
   z-index: 100;
-  background: rgba(2, 6, 23, 0.82);
+  background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   display: flex;
@@ -676,10 +679,11 @@ html, body {
 
 .modal-card {
   position: relative;
-  background: rgba(15, 23, 42, 0.94);
+  background: rgba(10, 10, 10, 0.96);
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 20px;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 45px rgba(56, 189, 248, 0.14);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(255, 255, 255, 0.05);
+  font-family: var(--font-modal-body);
   width: 100%;
   max-width: 680px;
   height: auto;
@@ -718,7 +722,7 @@ html, body {
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #cbd5e1;
+  color: #e5e5e5;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -727,8 +731,9 @@ html, body {
 }
 
 .modal-close-btn:hover {
-  background: rgba(255, 255, 255, 0.15);
-  color: #ffffff;
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #000000;
   transform: rotate(90deg);
 }
 
@@ -739,24 +744,26 @@ html, body {
 
 .modal-sub {
   display: inline-block;
-  font-family: var(--font-mono);
+  font-family: var(--font-modal-mono);
   font-size: 12px;
   font-weight: 700;
-  color: var(--text-cyan);
+  color: #d4d4d4;
   letter-spacing: 2px;
   margin-bottom: 8px;
 }
 
 .modal-title {
-  font-family: var(--font-hero);
+  font-family: var(--font-modal-hero);
   font-size: 32px;
   font-weight: 800;
   color: #ffffff;
   margin-bottom: 8px;
+  letter-spacing: -0.5px;
 }
 
 .modal-desc {
-  color: #94a3b8;
+  font-family: var(--font-modal-body);
+  color: #a3a3a3;
   font-size: 15px;
   line-height: 1.6;
 }
@@ -794,10 +801,11 @@ html, body {
 
 .filter-btn {
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #94a3b8;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #a3a3a3;
   padding: 7px 18px;
   border-radius: 9999px;
+  font-family: var(--font-modal-body);
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
@@ -806,11 +814,11 @@ html, body {
 
 .filter-btn:hover,
 .filter-btn.active {
-  background: var(--text-cyan);
-  color: #020617;
-  border-color: var(--text-cyan);
+  background: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
   font-weight: 600;
-  box-shadow: 0 0 14px rgba(56, 189, 248, 0.4);
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.35);
 }
 
 .projects-grid {
@@ -820,8 +828,8 @@ html, body {
 }
 
 .project-card {
-  background: rgba(2, 6, 23, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(18, 18, 18, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 16px;
   overflow: hidden;
   transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
@@ -831,8 +839,8 @@ html, body {
 
 .project-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(56, 189, 248, 0.4);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(56, 189, 248, 0.15);
+  border-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 255, 255, 0.12);
 }
 
 .project-banner {
@@ -844,15 +852,15 @@ html, body {
 }
 
 .project-category-badge {
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(0, 0, 0, 0.75);
   backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #f5f5f5;
   font-size: 11px;
   font-weight: 600;
   padding: 4px 10px;
   border-radius: 9999px;
-  font-family: var(--font-mono);
+  font-family: var(--font-modal-mono);
 }
 
 .project-content {
@@ -863,7 +871,7 @@ html, body {
 }
 
 .project-title {
-  font-family: var(--font-hero);
+  font-family: var(--font-modal-hero);
   font-size: 19px;
   font-weight: 700;
   color: #ffffff;
@@ -871,14 +879,16 @@ html, body {
 }
 
 .project-tagline {
-  color: var(--text-cyan);
+  font-family: var(--font-modal-body);
+  color: #e5e5e5;
   font-size: 12.5px;
   font-weight: 500;
   margin-bottom: 10px;
 }
 
 .project-description {
-  color: #94a3b8;
+  font-family: var(--font-modal-body);
+  color: #a3a3a3;
   font-size: 13.5px;
   line-height: 1.55;
   margin-bottom: 14px;
@@ -893,13 +903,13 @@ html, body {
 }
 
 .tag-pill {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #cbd5e1;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e5e5e5;
   font-size: 11.5px;
   padding: 3px 8px;
   border-radius: 6px;
-  font-family: var(--font-mono);
+  font-family: var(--font-modal-mono);
 }
 
 .project-links {
@@ -911,6 +921,7 @@ html, body {
   flex: 1;
   padding: 9px 14px;
   border-radius: 8px;
+  font-family: var(--font-modal-body);
   font-size: 13px;
   font-weight: 600;
   text-decoration: none;
@@ -924,23 +935,24 @@ html, body {
 }
 
 .btn-live {
-  background: var(--text-cyan);
-  color: #020617;
+  background: #ffffff;
+  color: #000000;
 }
 
 .btn-live:hover {
-  background: #7dd3fc;
-  box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+  background: #e5e5e5;
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.4);
 }
 
 .btn-code {
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.08);
   color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .btn-code:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.35);
 }
 
 /* 9. About Modal Details */
@@ -952,8 +964,8 @@ html, body {
 }
 
 .stat-box {
-  background: rgba(2, 6, 23, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(18, 18, 18, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   padding: 1rem;
   text-align: center;
@@ -961,15 +973,16 @@ html, body {
 
 .stat-number {
   display: block;
-  font-family: var(--font-hero);
+  font-family: var(--font-modal-hero);
   font-size: 28px;
   font-weight: 800;
-  color: var(--text-cyan);
+  color: #ffffff;
 }
 
 .stat-label {
+  font-family: var(--font-modal-body);
   font-size: 12px;
-  color: #94a3b8;
+  color: #a3a3a3;
 }
 
 .about-grid {
@@ -979,6 +992,7 @@ html, body {
 }
 
 .section-h3 {
+  font-family: var(--font-modal-hero);
   font-size: 17px;
   font-weight: 700;
   color: #ffffff;
@@ -987,7 +1001,8 @@ html, body {
 }
 
 .bio-para {
-  color: #94a3b8;
+  font-family: var(--font-modal-body);
+  color: #a3a3a3;
   font-size: 14px;
   line-height: 1.65;
   margin-bottom: 12px;
@@ -1002,7 +1017,7 @@ html, body {
 .timeline-item {
   position: relative;
   padding-left: 20px;
-  border-left: 2px solid rgba(56, 189, 248, 0.3);
+  border-left: 2px solid rgba(255, 255, 255, 0.22);
 }
 
 .timeline-dot {
@@ -1012,30 +1027,34 @@ html, body {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: var(--text-cyan);
-  box-shadow: 0 0 8px var(--text-cyan);
+  background: #ffffff;
+  box-shadow: 0 0 8px #ffffff;
 }
 
 .timeline-title {
+  font-family: var(--font-modal-body);
   font-size: 14.5px;
   font-weight: 600;
   color: #ffffff;
 }
 
 .company-badge {
-  color: var(--text-cyan);
+  color: #ffffff;
   font-weight: 500;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
 }
 
 .timeline-inst {
+  font-family: var(--font-modal-mono);
   font-size: 12px;
-  color: #64748b;
+  color: #737373;
   margin-bottom: 4px;
 }
 
 .timeline-desc {
+  font-family: var(--font-modal-body);
   font-size: 13px;
-  color: #94a3b8;
+  color: #a3a3a3;
   line-height: 1.45;
 }
 
@@ -1046,12 +1065,13 @@ html, body {
 }
 
 .tech-arsenal-pill {
-  background: rgba(2, 6, 23, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(18, 18, 18, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   padding: 5px 12px;
   border-radius: 9999px;
+  font-family: var(--font-modal-body);
   font-size: 12px;
-  color: #e2e8f0;
+  color: #f5f5f5;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -1061,6 +1081,8 @@ html, body {
   width: 7px;
   height: 7px;
   border-radius: 50%;
+  background: #ffffff !important;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
 }
 
 /* 10. Contact Modal */
@@ -1077,16 +1099,16 @@ html, body {
 }
 
 .info-card {
-  background: rgba(2, 6, 23, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(18, 18, 18, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   padding: 1.1rem;
 }
 
 .info-label {
   font-size: 11px;
-  font-family: var(--font-mono);
-  color: #64748b;
+  font-family: var(--font-modal-mono);
+  color: #737373;
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 6px;
@@ -1094,8 +1116,9 @@ html, body {
 }
 
 .info-val {
+  font-family: var(--font-modal-body);
   font-size: 14px;
-  color: #e2e8f0;
+  color: #ffffff;
   font-weight: 500;
 }
 
@@ -1107,16 +1130,17 @@ html, body {
 }
 
 .email-text {
-  font-family: var(--font-mono);
+  font-family: var(--font-modal-mono);
   font-size: 12.5px;
   color: #ffffff;
   word-break: break-all;
 }
 
 .btn-copy {
-  background: rgba(56, 189, 248, 0.15);
-  border: 1px solid rgba(56, 189, 248, 0.3);
-  color: var(--text-cyan);
+  font-family: var(--font-modal-mono);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
   padding: 4px 10px;
   border-radius: 6px;
   font-size: 12px;
@@ -1128,8 +1152,9 @@ html, body {
 }
 
 .btn-copy:hover {
-  background: var(--text-cyan);
-  color: #020617;
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #000000;
 }
 
 .status-online-dot {
@@ -1137,8 +1162,8 @@ html, body {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #22c55e;
-  box-shadow: 0 0 8px #22c55e;
+  background: #ffffff;
+  box-shadow: 0 0 8px #ffffff;
   margin-right: 4px;
 }
 
@@ -1153,8 +1178,8 @@ html, body {
   height: 38px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #cbd5e1;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #e5e5e5;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1163,9 +1188,9 @@ html, body {
 }
 
 .social-circle-link:hover {
-  border-color: var(--text-cyan);
+  border-color: #ffffff;
   color: #ffffff;
-  box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.35);
 }
 
 .contact-form {
@@ -1181,19 +1206,20 @@ html, body {
 }
 
 .form-group label {
+  font-family: var(--font-modal-body);
   font-size: 12px;
   font-weight: 500;
-  color: #94a3b8;
+  color: #a3a3a3;
 }
 
 .form-group input,
 .form-group textarea {
-  background: rgba(2, 6, 23, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(18, 18, 18, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 10px;
   padding: 10px 14px;
   color: #ffffff;
-  font-family: inherit;
+  font-family: var(--font-modal-body);
   font-size: 14px;
   outline: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -1201,13 +1227,14 @@ html, body {
 
 .form-group input:focus,
 .form-group textarea:focus {
-  border-color: var(--text-cyan);
-  box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+  border-color: #ffffff;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.25);
 }
 
 .btn-submit-contact {
-  background: var(--text-cyan);
-  color: #020617;
+  background: #ffffff;
+  color: #000000;
+  font-family: var(--font-modal-body);
   font-weight: 600;
   padding: 12px;
   border-radius: 10px;
@@ -1222,8 +1249,8 @@ html, body {
 }
 
 .btn-submit-contact:hover {
-  background: #7dd3fc;
-  box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+  background: #e5e5e5;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
 }
 
 .form-feedback {
@@ -1231,9 +1258,10 @@ html, body {
 }
 
 .success-msg {
-  background: rgba(34, 197, 94, 0.15);
-  border: 1px solid rgba(34, 197, 94, 0.3);
-  color: #4ade80;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  font-family: var(--font-modal-body);
   padding: 10px;
   border-radius: 8px;
   font-size: 13px;
@@ -1242,8 +1270,8 @@ html, body {
 
 /* 11. Resume Modal */
 .resume-preview-box {
-  background: rgba(2, 6, 23, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(18, 18, 18, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 14px;
   padding: 1.5rem;
   margin-bottom: 1.8rem;
@@ -1259,23 +1287,26 @@ html, body {
 }
 
 .resume-header-bar h3 {
+  font-family: var(--font-modal-hero);
   font-size: 20px;
   color: #ffffff;
 }
 
 .resume-header-bar p {
+  font-family: var(--font-modal-body);
   font-size: 13px;
-  color: var(--text-cyan);
+  color: #e5e5e5;
 }
 
 .resume-contact-badge {
-  font-family: var(--font-mono);
+  font-family: var(--font-modal-mono);
   font-size: 12px;
-  color: #94a3b8;
+  color: #a3a3a3;
   text-decoration: none;
 }
 
 .resume-snippet h4 {
+  font-family: var(--font-modal-hero);
   font-size: 14px;
   color: #ffffff;
   margin-bottom: 8px;
@@ -1283,7 +1314,8 @@ html, body {
 
 .resume-snippet ul {
   list-style-position: inside;
-  color: #94a3b8;
+  font-family: var(--font-modal-body);
+  color: #a3a3a3;
   font-size: 13.5px;
   line-height: 1.6;
 }
@@ -1297,6 +1329,7 @@ html, body {
   flex: 1;
   background: #ffffff;
   color: #020617;
+  font-family: var(--font-modal-body);
   font-weight: 600;
   padding: 12px 20px;
   border-radius: 10px;
@@ -1311,15 +1344,16 @@ html, body {
 }
 
 .btn-download-resume:hover {
-  background: #e2e8f0;
+  background: #e5e5e5;
   box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
 }
 
 .btn-secondary {
   padding: 12px 24px;
   border-radius: 10px;
+  font-family: var(--font-modal-body);
   background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   color: #ffffff;
   cursor: pointer;
   font-size: 14px;
@@ -1328,7 +1362,7 @@ html, body {
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.16);
 }
 
 /* 12. Skill Node Detail Modal */
@@ -1342,12 +1376,13 @@ html, body {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  box-shadow: 0 0 10px currentColor;
+  background: #ffffff !important;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8) !important;
 }
 
 .skill-level-card {
-  background: rgba(2, 6, 23, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(18, 18, 18, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   padding: 1.2rem;
   margin-bottom: 1.5rem;
@@ -1364,7 +1399,7 @@ html, body {
 .skill-progress-bar {
   width: 100%;
   height: 8px;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 9999px;
   overflow: hidden;
 }
@@ -1372,11 +1407,13 @@ html, body {
 .skill-progress-fill {
   height: 100%;
   border-radius: 9999px;
-  box-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+  background: #ffffff !important;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6) !important;
   transition: width 0.8s ease-out;
 }
 
 .rel-proj-head {
+  font-family: var(--font-modal-hero);
   font-size: 14px;
   color: #ffffff;
   margin-bottom: 10px;
@@ -1390,20 +1427,22 @@ html, body {
 }
 
 .rel-proj-item {
-  background: rgba(2, 6, 23, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(18, 18, 18, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
   padding: 10px;
 }
 
 .rel-proj-item h5 {
+  font-family: var(--font-modal-hero);
   font-size: 13.5px;
-  color: var(--text-cyan);
+  color: #ffffff;
 }
 
 .rel-proj-item p {
+  font-family: var(--font-modal-body);
   font-size: 12px;
-  color: #94a3b8;
+  color: #a3a3a3;
 }
 
 /* 13. Live Customizer Drawer */
