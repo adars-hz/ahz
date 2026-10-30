@@ -285,12 +285,12 @@ export class ModalManager {
           <form class="contact-form" id="contact-form" onsubmit="return false;">
             <div class="form-group">
               <label for="contact-name">Your Name</label>
-              <input type="text" id="contact-name" placeholder="John Doe" required />
+              <input type="text" id="contact-name" placeholder="Enter your name" required />
             </div>
 
             <div class="form-group">
               <label for="contact-email">Your Email</label>
-              <input type="email" id="contact-email" placeholder="john@example.com" required />
+              <input type="email" id="contact-email" placeholder="Enter your email" required />
             </div>
 
             <div class="form-group">
