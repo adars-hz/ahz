@@ -2,12 +2,11 @@ import './style.css';
 import { PORTFOLIO_CONFIG } from './config.js';
 import { GalaxyScene } from './galaxy.js';
 import { ModalManager } from './modals.js';
-import { CosmicAudio } from './audio.js';
+import { MotionEffects } from './motion.js';
 
 class PortfolioApp {
   constructor() {
-    this.audio = new CosmicAudio();
-    this.modalManager = new ModalManager(this.audio);
+    this.modalManager = new ModalManager();
     this.galaxyScene = null;
 
     // Typewriter state
@@ -26,12 +25,20 @@ class PortfolioApp {
     // 2. Start Typewriter Effect
     this.startTypewriter();
 
-    // 3. Initialize 3D Galaxy & Floating Tech Polyhedrons
+    // 3. Initialize 3D Galaxy & Interactive Portfolio Navigation Nodes
     const canvasContainer = document.getElementById('webgl-canvas-container');
-    this.galaxyScene = new GalaxyScene(canvasContainer, null);
+    this.galaxyScene = new GalaxyScene(canvasContainer, (node) => {
+      this.handleNavNodeClick(node);
+    });
 
-    // 4. Bind UI Event Handlers
+    // 4. Initialize Client-Side URL Hash Router for Dedicated Pages
+    this.initRouter();
+
+    // 5. Bind UI Event Handlers
     this.bindEvents();
+
+    // 6. Trigger Framer Motion Hero Entrance Animations
+    MotionEffects.animateHeroEntrance();
   }
 
   applyConfigToDOM() {
@@ -63,6 +70,12 @@ class PortfolioApp {
     if (pillTitle && p.statusPill) {
       const parts = p.statusPill.split(' ');
       pillTitle.textContent = parts[0] || 'Ahz';
+    }
+
+    // Stars Navigation Hint Message
+    const starsHintEl = document.getElementById('hint-msg-text');
+    if (starsHintEl && p.starsHint) {
+      starsHintEl.textContent = p.starsHint;
     }
   }
 
@@ -99,40 +112,171 @@ class PortfolioApp {
     this.typewriterTimeout = setTimeout(() => this.startTypewriter(), typeSpeed);
   }
 
+  initRouter() {
+    window.addEventListener('hashchange', () => {
+      this.handleRoute();
+    });
+
+    // Check hash on initial startup
+    this.handleRoute();
+  }
+
+  handleRoute() {
+    const rawHash = window.location.hash || '';
+    const route = rawHash.replace(/^#\/?/, '').toLowerCase().trim();
+
+    const p = PORTFOLIO_CONFIG.personal;
+    const defaultTitle = `${p.name} | ${p.roles[0] || 'Full Stack Developer'}`;
+
+    if (!route || route === '' || route === '/') {
+      this.modalManager.closePage();
+      if (this.galaxyScene) this.galaxyScene.resetWarpState();
+      this.isTransitioning = false;
+      document.title = defaultTitle;
+      return;
+    }
+
+    if (route === 'projects') {
+      this.modalManager.showProjects();
+      document.title = `Projects | ${p.name}`;
+      return;
+    }
+
+    if (route === 'about') {
+      this.modalManager.showAbout();
+      document.title = `About | ${p.name}`;
+      return;
+    }
+
+    if (route === 'contact') {
+      this.modalManager.showContact();
+      document.title = `Contact | ${p.name}`;
+      return;
+    }
+
+    if (route === 'resume') {
+      this.modalManager.showResume();
+      document.title = `Resume | ${p.name}`;
+      return;
+    }
+
+    if (route === 'photos') {
+      this.modalManager.showPhotos();
+      document.title = `Visual Gallery | ${p.name}`;
+      return;
+    }
+
+    // Default fallback
+    this.modalManager.closePage();
+    document.title = defaultTitle;
+  }
+
+  // Hyperspace Warp Transition: Spins galaxy fast, expands into pure white, fades in target page
+  triggerGalaxyWarpTransition(targetId) {
+    if (this.isTransitioning) return;
+    this.isTransitioning = true;
+
+    // 1. Start screen transition to solid brilliant white
+    const whiteOverlay = document.getElementById('warp-white-overlay');
+    if (whiteOverlay) {
+      whiteOverlay.classList.remove('fade-out');
+      whiteOverlay.classList.add('flash-in');
+    }
+
+    // 2. Trigger 3D Galaxy spin fast and expand large into the screen
+    if (this.galaxyScene) {
+      this.galaxyScene.triggerWarpJump(
+        // Midpoint callback: Screen is completely white
+        () => {
+          // Mount the target page behind the white overlay
+          window.location.hash = '#/' + targetId;
+
+          // Brief tick for DOM to paint behind white overlay, then smoothly fade out white
+          setTimeout(() => {
+            if (whiteOverlay) {
+              whiteOverlay.classList.remove('flash-in');
+              whiteOverlay.classList.add('fade-out');
+            }
+            this.isTransitioning = false;
+          }, 120);
+        },
+        // Complete callback: Clean up classes
+        () => {
+          setTimeout(() => {
+            if (whiteOverlay) {
+              whiteOverlay.classList.remove('fade-out');
+            }
+          }, 950);
+        }
+      );
+    } else {
+      window.location.hash = '#/' + targetId;
+      if (whiteOverlay) {
+        whiteOverlay.classList.remove('flash-in');
+      }
+      this.isTransitioning = false;
+    }
+  }
+
+  handleNavNodeClick(node) {
+    if (!node) return;
+
+    const targetId = (node.target || node.id || '').toLowerCase();
+    const internalSections = ['projects', 'about', 'contact', 'resume', 'photos'];
+
+    // 1. Internal Portfolio Navigation Nodes: Trigger Hyperspace Galaxy Warp Jump
+    if (internalSections.includes(targetId)) {
+      if (this.galaxyScene && !this.modalManager.activePage) {
+        this.triggerGalaxyWarpTransition(targetId);
+        return;
+      } else {
+        window.location.hash = '#/' + targetId;
+        return;
+      }
+    }
+
+    // 2. External Social Profiles (Safe new browser tab)
+    if (targetId === 'github' || node.icon === 'github') {
+      const url = node.url || PORTFOLIO_CONFIG.socials.github;
+      if (url) window.open(url, '_blank', 'noopener,noreferrer');
+      return;
+    }
+
+    if (targetId === 'linkedin' || node.icon === 'linkedin') {
+      const url = node.url || PORTFOLIO_CONFIG.socials.linkedin;
+      if (url) window.open(url, '_blank', 'noopener,noreferrer');
+      return;
+    }
+
+    if (targetId === 'instagram' || node.icon === 'instagram') {
+      const url = node.url || PORTFOLIO_CONFIG.socials.instagram || 'https://instagram.com/adars_hz';
+      if (url) window.open(url, '_blank', 'noopener,noreferrer');
+      return;
+    }
+
+    // Fallback for any other external URL
+    if (node.type === 'external' && node.url) {
+      window.open(node.url, '_blank', 'noopener,noreferrer');
+    }
+  }
+
   bindEvents() {
-    // 1. View Projects Button
-    const btnProjects = document.getElementById('btn-view-projects');
-    if (btnProjects) {
-      btnProjects.addEventListener('click', () => {
-        this.modalManager.showProjects();
+    // 0. Click the stars hint interaction -> highlights all galaxy stars
+    const starsHintBadge = document.getElementById('hero-stars-hint');
+    if (starsHintBadge) {
+      starsHintBadge.addEventListener('click', () => {
+        if (this.galaxyScene) {
+          this.galaxyScene.pulseAllNodes();
+        }
+      });
+      starsHintBadge.addEventListener('mouseenter', () => {
+        if (this.galaxyScene) {
+          this.galaxyScene.pulseAllNodes();
+        }
       });
     }
 
-    // 2. About Button
-    const btnAbout = document.getElementById('btn-about');
-    if (btnAbout) {
-      btnAbout.addEventListener('click', () => {
-        this.modalManager.showAbout();
-      });
-    }
-
-    // 3. Contact Button
-    const btnContact = document.getElementById('btn-contact');
-    if (btnContact) {
-      btnContact.addEventListener('click', () => {
-        this.modalManager.showContact();
-      });
-    }
-
-    // 4. Resume Button
-    const btnResume = document.getElementById('btn-resume');
-    if (btnResume) {
-      btnResume.addEventListener('click', () => {
-        this.modalManager.showResume();
-      });
-    }
-
-    // 5. Bottom Right Control Pill (Ahz CTRL) -> Toggles AHZ SYSTEM CORE Panel
+    // 1. Bottom Right Control Pill (Ahz CTRL) -> Toggles AHZ SYSTEM CORE Panel
     const ctrlPill = document.getElementById('bottom-control-pill');
     const systemPanel = document.getElementById('ahz-system-panel');
     const closePanelBtn = document.getElementById('ahz-close-btn');
@@ -141,7 +285,6 @@ class PortfolioApp {
       ctrlPill.addEventListener('click', (e) => {
         e.stopPropagation();
         systemPanel.classList.toggle('active');
-        if (this.audio) this.audio.playChime(750);
       });
     }
 
@@ -178,7 +321,6 @@ class PortfolioApp {
         if (this.galaxyScene) {
           this.galaxyScene.setTheme(theme);
         }
-        if (this.audio) this.audio.playChime(950);
       });
     });
 
@@ -192,16 +334,6 @@ class PortfolioApp {
         const speed = parseFloat(btn.getAttribute('data-speed'));
         if (this.galaxyScene) {
           this.galaxyScene.setRotationSpeed(speed);
-        }
-        if (this.audio) this.audio.playChime(speed > 1 ? 1400 : 700);
-      });
-    });
-
-    // Play subtle chime sound on button hovers
-    document.querySelectorAll('button, .social-circle-btn, .bottom-control-pill').forEach(btn => {
-      btn.addEventListener('mouseenter', () => {
-        if (this.audio) {
-          this.audio.playChime(1200);
         }
       });
     });

@@ -33,27 +33,6 @@
           <span class="typewriter-cursor">|</span>
         </div>
 
-        <!-- Action Buttons -->
-        <div class="hero-actions" id="hero-actions">
-          <button class="btn-primary" id="btn-view-projects">
-            <span>View Projects</span>
-          </button>
-          <button class="btn-glass" id="btn-about">
-            <span>About</span>
-          </button>
-          <button class="btn-glass" id="btn-contact">
-            <span>Contact</span>
-          </button>
-          <button class="btn-glass btn-resume" id="btn-resume">
-            <svg class="icon-download" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-              <polyline points="7 10 12 15 17 10"></polyline>
-              <line x1="12" y1="15" x2="12" y2="3"></line>
-            </svg>
-            <span>Resume</span>
-          </button>
-        </div>
-
         <!-- Social Icons Row -->
         <div class="hero-socials" id="hero-socials">
           <a href="#" target="_blank" rel="noopener noreferrer" class="social-circle-btn" id="social-github" title="GitHub Profile">
@@ -75,11 +54,18 @@
             </svg>
           </a>
         </div>
+
+        <!-- Interactive Galaxy Hint Message -->
+        <div class="hero-stars-hint" id="hero-stars-hint" title="Click any floating star or node around the galaxy">
+          <span class="sparkle-orbit-icon" aria-hidden="true">✦</span>
+          <span class="hint-msg-text" id="hint-msg-text">Click the stars to explore</span>
+          <span class="sparkle-orbit-icon" aria-hidden="true">✦</span>
+        </div>
       </div>
     </main>
 
     <!-- Bottom Right Control Pill (Matches exact Ahz CTRL pill from image) -->
-    <div class="bottom-control-pill" id="bottom-control-pill" title="Click to customize portfolio or toggle audio">
+    <div class="bottom-control-pill" id="bottom-control-pill" title="Click to open Ahz System Core settings">
       <span class="pulsing-cyan-dot"></span>
       <span class="ctrl-text" id="pill-title">Ahz</span>
       <span class="ctrl-key-badge">CTRL</span>
@@ -145,8 +131,11 @@
       </div>
     </aside>
 
-    <!-- Modal Container for Projects, About, Contact, Resume, Live Customizer -->
-    <div id="modal-overlay-container" class="modal-overlay-container"></div>
+    <!-- Dedicated Page Views Container for Projects, About, Contact, Resume, Photos -->
+    <div id="page-overlay-container" class="page-overlay-container modal-overlay-container" aria-live="polite"></div>
+
+    <!-- Hyperspace Cosmic Warp White Flash Overlay -->
+    <div id="warp-white-overlay" class="warp-white-overlay" aria-hidden="true"></div>
 
     <script type="module" src="/src/main.js"></script>
   </body>
