@@ -25,7 +25,7 @@ export const PORTFOLIO_CONFIG = {
   socials: {
     github: "https://github.com/adars-hz",
     linkedin: "https://linkedin.com/in/adarshz001",
-    instagram: "https://instagram.com/adars_hz",
+    instagram: "https://www.instagram.com/adars_hz_?vrfl=ZDNlZDc0MzIxNw%3D%3D",
     email: "mailto:adarshz1080@gmail.com"
   },
 
@@ -295,7 +295,7 @@ export const PORTFOLIO_CONFIG = {
       name: "INSTAGRAM",
       label: "INSTAGRAM",
       type: "external",
-      url: "https://instagram.com/adars_hz",
+      url: "https://www.instagram.com/adars_hz_?vrfl=ZDNlZDc0MzIxNw%3D%3D",
       symbol3D: "instagram",
       icon: "instagram",
       angle: Math.PI * 1.5, // 270°

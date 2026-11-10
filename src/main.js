@@ -249,7 +249,7 @@ class PortfolioApp {
     }
 
     if (targetId === 'instagram' || node.icon === 'instagram') {
-      const url = node.url || PORTFOLIO_CONFIG.socials.instagram || 'https://instagram.com/adars_hz';
+      const url = node.url || PORTFOLIO_CONFIG.socials.instagram || 'https://www.instagram.com/adars_hz_?vrfl=ZDNlZDc0MzIxNw%3D%3D';
       if (url) window.open(url, '_blank', 'noopener,noreferrer');
       return;
     }
