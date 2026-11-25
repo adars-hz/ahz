@@ -152,7 +152,7 @@ export class PageManager {
   // 1. Dedicated Projects Page
   showProjects() {
     const projects = PORTFOLIO_CONFIG.projects;
-    const categories = ['All', 'Full Stack', 'AI & Machine Learning', 'Backend'];
+    const categories = ['All', 'Full Stack', 'AI & Machine Learning', 'Backend', 'Frontend & 3D'];
 
     const renderProjects = (filter = 'All') => {
       const filtered = filter === 'All'
@@ -168,7 +168,10 @@ export class PageManager {
               return cat.includes('full stack') || tags.includes('mern') || tags.includes('react.js');
             }
             if (q.includes('backend')) {
-              return cat.includes('backend') || tags.includes('fastapi') || tags.includes('flask') || tags.includes('python');
+              return cat.includes('backend') || tags.includes('fastapi') || tags.includes('flask') || tags.includes('django') || tags.includes('python');
+            }
+            if (q.includes('frontend') || q.includes('3d')) {
+              return cat.includes('frontend') || cat.includes('3d') || tags.includes('three.js') || tags.includes('webgl');
             }
             return cat.includes(q);
           });
@@ -177,6 +180,7 @@ export class PageManager {
         <article class="project-card">
           <div class="project-banner" style="background: ${p.image};">
             <span class="project-category-badge">${p.category}</span>
+            ${p.liveUrl ? `<span class="project-live-indicator"><span class="live-pulse-dot"></span> Live Demo</span>` : ''}
           </div>
           <div class="project-content">
             <h3 class="project-title">${p.title}</h3>
@@ -186,12 +190,14 @@ export class PageManager {
               ${p.tags.map(t => `<span class="tag-pill">${t}</span>`).join('')}
             </div>
             <div class="project-links">
-              <a href="${p.liveUrl}" target="_blank" rel="noopener noreferrer" class="btn-project btn-live">
-                <span>View Details</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-              </a>
-              <a href="${p.githubUrl}" target="_blank" rel="noopener noreferrer" class="btn-project btn-code">
-                <span>Source Code</span>
+              ${p.liveUrl ? `
+                <a href="${p.liveUrl}" target="_blank" rel="noopener noreferrer" class="btn-project btn-live" title="Open Deployed Live Demo">
+                  <span>Live Demo</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+              ` : ''}
+              <a href="${p.githubUrl}" target="_blank" rel="noopener noreferrer" class="btn-project btn-code" title="View Source Code on GitHub">
+                <span>GitHub Repo</span>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
               </a>
             </div>
@@ -465,8 +471,9 @@ export class PageManager {
               <li><strong>Education:</strong> Master of Computer Applications (MCA) at AJ Institute of Engineering & Technology, Mangaluru (Nov 2026 – Present) | Bachelor of Computer Applications (BCA) at Gurudev Arts & Science College, Payyannur (Jul 2022 – Mar 2025).</li>
               <li><strong>Internship:</strong> Full Stack Development Intern at ICT Academy of Kerala (Dec 2024 – Jan 2025) using full MERN stack (MongoDB, Express.js, React.js, Node.js).</li>
               <li><strong>AI & ML Systems:</strong> NeuroFace attendance marking engine (MTCNN multi-face detection, ArcFace embeddings, duplicate rejection) & Smart Study Planner (Decision Tree Regression).</li>
-              <li><strong>Full Stack Platform:</strong> Life Connect Registry (3-role responsive organ donation web platform with secure authentication).</li>
-              <li><strong>Core Arsenal:</strong> Python, JavaScript, Java, React.js, Node.js, Express.js, FastAPI, Django, MongoDB, SQLite, Git, Postman.</li>
+              <li><strong>Full Stack Platforms:</strong> Job Portal (MERN stack recruitment hub with JWT auth & resume uploads) & LifeConnect Registry (3-role organ donation management system).</li>
+              <li><strong>Interactive 3D Portfolio:</strong> Cosmic WebGL Portfolio (Three.js procedural galaxy scene with routing and motion physics).</li>
+              <li><strong>Core Arsenal:</strong> Python, JavaScript, TypeScript, React.js, Node.js, Express.js, FastAPI, Django, MongoDB, SQLite, Three.js, Git.</li>
             </ul>
           </div>
         </div>

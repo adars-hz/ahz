@@ -114,43 +114,67 @@ export const PORTFOLIO_CONFIG = {
     }
   ],
 
-  // 4. Academic Projects from Resume
+  // 4. Projects from GitHub & Verified Engineering
   projects: [
     {
       id: "neuroface",
       title: "NeuroFace – AI Student Attendance System",
-      tagline: "Facial-Recognition Attendance with Multi-Face Detection",
+      tagline: "Facial-Recognition Attendance with Multi-Face Detection & ArcFace",
       category: "AI & Full Stack",
-      description: "Engineered a facial-recognition attendance system using MTCNN for face detection and ArcFace embeddings to identify multiple students in a single classroom frame. Implemented automatic attendance marking with duplicate-attendance prevention and unknown-face rejection. Designed 3 role-based dashboards (Admin, Teacher, Student) with subject-wise attendance, leave management, and exam eligibility tracking against an 85% requirement.",
-      tags: ["Python", "React.js", "FastAPI", "MTCNN", "ArcFace", "AI/ML"],
-      githubUrl: "https://github.com/adars-hz",
-      liveUrl: "https://github.com/adars-hz",
+      description: "Engineered an AI-powered student attendance management system utilizing MTCNN for multi-face detection and ArcFace deep learning embeddings. Features real-time multi-student face recognition in a single camera feed, automatic duplicate prevention, and role-based portals (Admin, Teacher, Student) with subject-wise tracking and eligibility metrics.",
+      tags: ["Python", "React.js", "FastAPI", "MTCNN", "ArcFace", "AI/ML", "OpenCV"],
+      githubUrl: "https://github.com/adars-hz/NeuroFace",
+      liveUrl: "https://neuro-face-72kikmgix-adarshz-s-projects.vercel.app/",
       stats: { stars: "AI Model", forks: "ArcFace" },
-      image: "linear-gradient(135deg, #2b2b2b 0%, #0d0d0d 100%)"
+      image: "linear-gradient(135deg, #1f2937 0%, #111827 100%)"
     },
     {
       id: "life-connect",
-      title: "Life Connect Registry – Organ Donation Platform",
+      title: "LifeConnect Registry – Organ Donation Platform",
       tagline: "Role-Based Organ Donation & Donor-Recipient Management",
       category: "Full Stack",
-      description: "Built a responsive organ donation platform supporting 3 user roles (donor, recipient, admin) with registration and secure authentication. Developed dashboards, application status tracking, document upload, and admin verification workflows with accessible, mobile-first responsive design.",
-      tags: ["HTML", "CSS", "JavaScript", "Responsive Design", "Authentication"],
-      githubUrl: "https://github.com/adars-hz",
-      liveUrl: "https://github.com/adars-hz",
-      stats: { stars: "3 Roles", forks: "Verified" },
-      image: "linear-gradient(135deg, #383838 0%, #121212 100%)"
+      description: "Built a centralized organ donation awareness and management web application in Django. Implemented multi-role access control for Donors, Recipients, and Admins with secure registration, medical document uploads, live application status tracking, and administrative review workflows.",
+      tags: ["Python", "Django", "SQLite", "HTML/CSS", "JavaScript", "RBAC"],
+      githubUrl: "https://github.com/adars-hz/LifeConnect_Registry",
+      liveUrl: null,
+      stats: { stars: "Django", forks: "3 Roles" },
+      image: "linear-gradient(135deg, #27272a 0%, #09090b 100%)"
+    },
+    {
+      id: "job-portal",
+      title: "Job Portal – Full-Stack Recruitment Platform",
+      tagline: "MERN Stack Career Hub with Authentication & Job Management",
+      category: "Full Stack",
+      description: "Architected a full-stack career platform using the MERN stack (MongoDB, Express.js, React.js, Node.js). Features role-based access for job seekers and recruiters, secure JWT authentication, real-time job searching & filtering, dynamic resume submissions, and interactive application management dashboards.",
+      tags: ["MongoDB", "Express.js", "React.js", "Node.js", "MERN Stack", "REST APIs"],
+      githubUrl: "https://github.com/adars-hz/job-portal",
+      liveUrl: "https://job-portal-one-iota.vercel.app",
+      stats: { stars: "MERN", forks: "Vercel" },
+      image: "linear-gradient(135deg, #18181b 0%, #000000 100%)"
     },
     {
       id: "smart-study-planner",
-      title: "Smart Study Planner – AI-Powered Timetable Generator",
-      tagline: "Machine Learning Timetable Generator & Study Optimizer",
+      title: "Smart Study Planner – AI Timetable Generator",
+      tagline: "Machine Learning Study Optimizer using Decision Tree Regression",
       category: "AI & Backend",
-      description: "Developed an AI-based study planner that predicts subject priority using Decision Tree Regression (Scikit-Learn). Automated study-time allocation across subjects based on exam schedules and preparation levels, with an interactive Flask web interface generating personalized study timetables in real time.",
+      description: "Developed an intelligent study timetable generator powered by Scikit-Learn Decision Tree Regression. Automatically computes subject priority and dynamically allocates study hours according to upcoming exam dates, syllabus complexity, and preparation status, paired with a real-time web interface.",
       tags: ["Python", "Flask", "Scikit-Learn", "Machine Learning", "Decision Tree"],
-      githubUrl: "https://github.com/adars-hz",
-      liveUrl: "https://github.com/adars-hz",
-      stats: { stars: "ML Regression", forks: "Flask" },
-      image: "linear-gradient(135deg, #424242 0%, #171717 100%)"
+      githubUrl: "https://github.com/adars-hz/Smart_study_planner",
+      liveUrl: "https://smart-study-planner-iota-three.vercel.app",
+      stats: { stars: "Scikit-Learn", forks: "Flask" },
+      image: "linear-gradient(135deg, #262626 0%, #0a0a0a 100%)"
+    },
+    {
+      id: "portfolio",
+      title: "Cosmic 3D Galaxy Portfolio",
+      tagline: "Interactive Three.js Galaxy Hub with Dynamic Routing & Motion Physics",
+      category: "Frontend & 3D",
+      description: "Engineered an interactive 3D WebGL cosmic portfolio utilizing Three.js and Vite. Features procedural star generation, rotating spiral arms, interactive floating skill polyhedrons, sound design, dedicated page transitions, and responsive mobile-first UI with modern typography.",
+      tags: ["JavaScript", "Three.js", "WebGL", "Vite", "CSS3", "Framer Motion"],
+      githubUrl: "https://github.com/adars-hz/ahz",
+      liveUrl: "https://adarshz.is-a.dev",
+      stats: { stars: "Three.js", forks: "is-a.dev" },
+      image: "linear-gradient(135deg, #1e1e1e 0%, #050505 100%)"
     }
   ],
 
@@ -165,7 +189,7 @@ export const PORTFOLIO_CONFIG = {
     ],
     stats: [
       { label: "Education", value: "MCA" },
-      { label: "Projects Completed", value: "3+" },
+      { label: "Projects Completed", value: "5+" },
       { label: "Core Technologies", value: "10+" },
       { label: "Internship", value: "MERN" }
     ],
